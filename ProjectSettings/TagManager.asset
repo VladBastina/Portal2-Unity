@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - ceiling
   - Portal
+  - Camera
   layers:
   - Default
   - TransparentFX
