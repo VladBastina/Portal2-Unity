@@ -8,11 +8,12 @@ TagManager:
   - Floor
   - Wall
   - ceiling
+  - Portal
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Map
   - Water
   - UI
   - 
