@@ -10,6 +10,7 @@ TagManager:
   - ceiling
   - Portal
   - Camera
+  - Cube
   layers:
   - Default
   - TransparentFX

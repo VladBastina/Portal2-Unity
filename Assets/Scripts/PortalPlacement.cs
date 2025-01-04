@@ -25,6 +25,7 @@ public class PortalPlacement : MonoBehaviour
     {
         Vector3 position = transform.position;
         position += cameraMove.GetForward() * 0.1f;
+        position += transform.up * 7.5f;
 
         if(Input.GetButtonDown("Fire1"))
         {
