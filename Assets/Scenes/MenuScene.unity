@@ -1747,6 +1747,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1699742166}
     - target: {fileID: 360571014068089117, guid: 56fc080e7bbacb24c86fd1e5760231bd, type: 3}
+      propertyPath: forwardOffset
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 360571014068089117, guid: 56fc080e7bbacb24c86fd1e5760231bd, type: 3}
       propertyPath: 'portals.Array.data[0]'
       value: 
       objectReference: {fileID: 3643344766312924942}

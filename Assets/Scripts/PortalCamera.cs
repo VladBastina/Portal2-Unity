@@ -16,6 +16,12 @@ public class PortalCamera : MonoBehaviour
     [SerializeField]
     private int iterations = 7;
 
+    [SerializeField]
+    private float forwardOffset=5.0f;
+
+    [SerializeField]
+    private float upOffset=7.5f;
+
     private RenderTexture tempTexture1;
     private RenderTexture tempTexture2;
 
@@ -88,8 +94,8 @@ public class PortalCamera : MonoBehaviour
             cameraTransform.position = outTransform.TransformPoint(relativePos);
 
             // Apply an upward offset to the camera's position.
-            cameraTransform.position += outTransform.up * 7.5f;
-            cameraTransform.position -= outTransform.forward * 5.0f;
+            cameraTransform.position += outTransform.up * upOffset;
+            cameraTransform.position -= outTransform.forward * forwardOffset;
 
             // Rotate the camera to look through the other portal.
             Quaternion relativeRot = Quaternion.Inverse(inTransform.rotation) * cameraTransform.rotation;

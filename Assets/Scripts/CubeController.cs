@@ -2,18 +2,24 @@ using UnityEngine;
 
 public class CubeController : PortalableObject
 {
+    private Vector3 startPosition;
+    private Quaternion startRotation;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         base.Awake();
+        startPosition = transform.position;
+        startRotation = transform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.y <= -5.0f)
+        if(transform.position.y <= -50.0f)
         {
-            transform.position =  new Vector3(transform.position.x,3.0f,transform.position.z);
+            transform.position = startPosition;
+            transform.rotation = startRotation;
         }
     }
 

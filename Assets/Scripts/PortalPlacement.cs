@@ -14,6 +14,12 @@ public class PortalPlacement : MonoBehaviour
     [SerializeField]
     private Crosshair crosshair;
 
+    [SerializeField]
+    private float forwardOffset=0.1f;
+
+    [SerializeField]
+    private float upOffset=7.5f;
+
     private CameraMove cameraMove;
 
     private void Awake()
@@ -24,8 +30,8 @@ public class PortalPlacement : MonoBehaviour
     private void Update()
     {
         Vector3 position = transform.position;
-        position += cameraMove.GetForward() * 0.1f;
-        position += transform.up * 7.5f;
+        position += cameraMove.GetForward() * forwardOffset;
+        position += transform.up * upOffset;
 
         if(Input.GetButtonDown("Fire1"))
         {
