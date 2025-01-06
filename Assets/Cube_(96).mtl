@@ -1,0 +1,10 @@
+newmtl Wall_middle
+map_Kd Portal-concrete_modular_wall002.png
+Kd 1 1 1
+d 1
+
+newmtl Wall_low
+map_Kd Portal-concrete_modular_wall002.png
+Kd 1 1 1
+d 1
+
