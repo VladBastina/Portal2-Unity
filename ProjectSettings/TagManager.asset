@@ -11,6 +11,7 @@ TagManager:
   - Portal
   - Camera
   - Cube
+  - Button
   layers:
   - Default
   - TransparentFX
