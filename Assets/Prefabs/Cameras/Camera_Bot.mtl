@@ -1,0 +1,14 @@
+newmtl acmat_0
+Kd 0.8 0.8 0.8
+Ka 0.2 0.2 0.2
+Ks 0.2 0.2 0.2
+Ns 128
+Tr 1.47136e-43
+map_Kd CameraBot_Lens.png
+newmtl acmat_1
+Kd 0.8 0.8 0.8
+Ka 0.2 0.2 0.2
+Ks 0.2 0.2 0.2
+Ns 128
+Tr 2.14436e-19
+map_Kd CameraBot.png
