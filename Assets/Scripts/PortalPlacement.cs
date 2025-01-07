@@ -29,6 +29,8 @@ public class PortalPlacement : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0f) return;
+
         Vector3 position = transform.position;
         position += cameraMove.GetForward() * forwardOffset;
         position += transform.up * upOffset;

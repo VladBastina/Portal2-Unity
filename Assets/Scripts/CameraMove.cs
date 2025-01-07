@@ -29,6 +29,8 @@ public class CameraMove : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0f) return;
+
         // Rotate the body around the Y-axis.
         float bodyRotationY = Input.GetAxis("Mouse X") * cameraSpeed;
         BodyRotation *= Quaternion.Euler(0.0f, bodyRotationY, 0.0f);
