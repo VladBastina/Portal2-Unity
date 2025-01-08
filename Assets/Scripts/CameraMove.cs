@@ -30,10 +30,15 @@ public class CameraMove : MonoBehaviour
     private float targetVolume = 0.0f;
     private float fadeSpeed = 5.0f;
 
+    private Animator animator;
+    private float lastVertical = 0;
+    private float lastHorizontal = 0;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         rigidbody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
 
         BodyRotation = transform.rotation;
@@ -68,6 +73,8 @@ public class CameraMove : MonoBehaviour
 
         HandleWalkingSound();
 
+        UpdateAnimations(x, z);
+
         // Check for jump.
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -98,6 +105,41 @@ public class CameraMove : MonoBehaviour
         }
     }
 
+    void UpdateAnimations(float horizontal, float vertical)
+    {
+        if (vertical == 1 && lastVertical != vertical)
+        {
+            animator.SetInteger("VerticalWalk", (int)vertical);
+            lastVertical = vertical;
+        }
+        else if (vertical == 0 && lastVertical != vertical)
+        {
+            animator.SetInteger("VerticalWalk", (int)vertical);
+            lastVertical = vertical;
+        }
+        else if (vertical == -1 && lastVertical != vertical)
+        {
+            animator.SetInteger("VerticalWalk", (int)vertical);
+            lastVertical = vertical;
+        }
+
+        if (horizontal == 0 && lastHorizontal != horizontal)
+        {
+            animator.SetInteger("HorizontalWalk", (int)horizontal);
+            lastHorizontal = horizontal;
+        }
+        else if (horizontal == 1 && lastHorizontal != horizontal)
+        {
+            animator.SetInteger("HorizontalWalk", (int)horizontal);
+            lastHorizontal = horizontal;
+        }
+        else if (horizontal == -1 && lastHorizontal != horizontal)
+        {
+            animator.SetInteger("HorizontalWalk", (int)horizontal);
+            lastHorizontal = horizontal;
+        }
+    }
+
     private void HandleWalkingSound()
     {
         if (moveVector != Vector3.zero && isGrounded)
@@ -112,10 +154,8 @@ public class CameraMove : MonoBehaviour
         else
         {
             targetVolume = 0.0f; // Reduce volumul la 0 dacă jucătorul nu se mișcă.
+            audioSource.Stop();
         }
-
-        // Tranziție lină a volumului
-        audioSource.volume = Mathf.Lerp(audioSource.volume, targetVolume, Time.deltaTime * fadeSpeed);
     }
 
     public void PlaySound(AudioClip clip, bool loop)
