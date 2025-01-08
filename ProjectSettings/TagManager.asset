@@ -12,6 +12,7 @@ TagManager:
   - Camera
   - Cube
   - Button
+  - Atins
   layers:
   - Default
   - TransparentFX
