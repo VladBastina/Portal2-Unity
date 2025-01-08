@@ -6,7 +6,16 @@ public class DoorOpener : MonoBehaviour
     public GameObject buttonBase;
 
     private Animator animator;
+    private AudioSource doorAudioSource;
+
+    public AudioClip doorOpen;
+    public AudioClip doorClose;
+
     private Animator buttonAnimator;
+    private AudioSource buttonAudioSource;
+
+    public AudioClip buttonPress;
+    public AudioClip buttonRelease;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,8 +31,10 @@ public class DoorOpener : MonoBehaviour
         {
             Debug.LogError("Animator component not found on the assigned door GameObject.");
         }
+        doorAudioSource = door.GetComponent<AudioSource>();
 
         buttonAnimator = buttonBase.GetComponent<Animator>();
+        buttonAudioSource = buttonBase.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,6 +49,10 @@ public class DoorOpener : MonoBehaviour
         {
             animator.Play("OpenDoorLevel");
             buttonAnimator.Play("PressButton");
+            buttonAudioSource.clip = buttonPress;
+            buttonAudioSource.Play();
+            doorAudioSource.clip = doorOpen;
+            doorAudioSource.Play();
         }
     }
 
@@ -47,6 +62,10 @@ public class DoorOpener : MonoBehaviour
         {
             animator.Play("ExitDoorLevel");
             buttonAnimator.Play("UnpressButton");
+            buttonAudioSource.clip = buttonRelease;
+            buttonAudioSource.Play();
+            doorAudioSource.clip = doorClose;
+            doorAudioSource.Play();
         }
     }
 }

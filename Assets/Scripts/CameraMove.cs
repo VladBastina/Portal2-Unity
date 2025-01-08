@@ -18,8 +18,21 @@ public class CameraMove : MonoBehaviour
     private bool isGrounded = true; // Track whether the player is grounded.
     private new Rigidbody rigidbody;
 
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip walksound;
+    [SerializeField]
+    private AudioClip jumpSound;
+    [SerializeField]
+    private AudioClip landSound;
+
+    private float targetVolume = 0.0f;
+    private float fadeSpeed = 5.0f;
+
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         rigidbody = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -53,11 +66,15 @@ public class CameraMove : MonoBehaviour
         float z = Input.GetAxis("Vertical");
         moveVector = new Vector3(x, 0.0f, z).normalized * moveSpeed;
 
+        HandleWalkingSound();
+
         // Check for jump.
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false; // Prevent double jumping.
+            
+            PlaySound(jumpSound,false);
         }
     }
 
@@ -73,8 +90,42 @@ public class CameraMove : MonoBehaviour
         // Check if grounded.
         if (collision.contacts[0].normal.y > 0.5f)
         {
+            if (!isGrounded)
+            {
+                PlaySound(landSound, false);
+            }
             isGrounded = true;
         }
+    }
+
+    private void HandleWalkingSound()
+    {
+        if (moveVector != Vector3.zero && isGrounded)
+        {
+            targetVolume = 1.0f; // Setează volumul țintă pentru sunetul de mers.
+
+            if (!audioSource.isPlaying || audioSource.clip != walksound)
+            {
+                PlaySound(walksound, true); // Redă sunetul în buclă.
+            }
+        }
+        else
+        {
+            targetVolume = 0.0f; // Reduce volumul la 0 dacă jucătorul nu se mișcă.
+        }
+
+        // Tranziție lină a volumului
+        audioSource.volume = Mathf.Lerp(audioSource.volume, targetVolume, Time.deltaTime * fadeSpeed);
+    }
+
+    public void PlaySound(AudioClip clip, bool loop)
+    {
+        if (audioSource.isPlaying && audioSource.clip == clip)
+            return; // Dacă sunetul curent este deja redat, nu-l relua.
+
+        audioSource.clip = clip;
+        audioSource.loop = loop;
+        audioSource.Play();
     }
 
     public void ResetBodyRotation()

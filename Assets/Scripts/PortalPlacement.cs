@@ -21,6 +21,13 @@ public class PortalPlacement : MonoBehaviour
     private float upOffset=7.5f;
 
     private CameraMove cameraMove;
+    [SerializeField]
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip shootPortal1;
+    [SerializeField]
+    private AudioClip shootPortal2;
 
     private void Awake()
     {
@@ -38,10 +45,14 @@ public class PortalPlacement : MonoBehaviour
         if(Input.GetButtonDown("Fire1"))
         {
             FirePortal(0, position, cameraMove.GetForward(), 250.0f);
+            audioSource.clip = shootPortal1;
+            audioSource.Play();
         }
         else if (Input.GetButtonDown("Fire2"))
         {
             FirePortal(1, position, cameraMove.GetForward(), 250.0f);
+            audioSource.clip = shootPortal2;
+            audioSource.Play();
         }
     }
 
